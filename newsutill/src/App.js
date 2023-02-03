@@ -10,11 +10,13 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+
   // Link
 } from "react-router-dom";
 // import Firstpage from './Component/Firstpage';
 import SignUp from "./Component/SignUp";
 import Login from "./Component/Login";
+
 // import Footer from "./Component/Footer";
 // import SignUp from "./Component/SignUp";
 // import Newsstyle from './Component/Newsstyle';
@@ -27,15 +29,16 @@ import Login from "./Component/Login";
 // } from "react-router-dom";
 
 function App() {
+    // let auth = localStorage.getItem("users");
   return (
-  
+ 
      
     <div>
        <Router>
     <Navbar></Navbar>
           <Switch>
          
-
+    
           <Route exact path="/sports"><News key="sports" category ="sports"/></Route>
 
           <Route exact path="/business"><News key="business" category="business"/></Route>
@@ -50,7 +53,7 @@ function App() {
 
           <Route exact path="/technology"><News key="technology" category ="technology"/></Route>
         
-
+            
         
 
         </Switch>
@@ -58,7 +61,7 @@ function App() {
    
         <Route exact path="/"><SignUp/></Route>
         <Route exact path="/login"><Login/></Route>
-  
+       
       
     </Router>    </div>
  

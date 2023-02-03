@@ -1,31 +1,48 @@
-import React, { useState } from 'react'
-// import { useNavigate  } from "react-router-dom";
-
+import React, { useEffect, useState  } from 'react'
+// import { Redirect } from "react-router-dom";
+// import { Redirect ,useHistory } from "react-router-dom";
+// import { Redirect, Switch } from "react-router-dom";
 
 
 function SignUp() {
- 
+    // const history = useHistory();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    useEffect(()=>{
+        let auth = localStorage.getItem("users");
+        if(auth){window.location.href="/sports";};
+    })
     // let navigate = useNavigate();
-    let submitButton = async() => {
-        console.log(name , email , password);
-        let data = await fetch("http://localhost:4000/register",{
+
+    useEffect(()=>{
+        
+       
+        
+    })
+
+    const dataPrint = async () => {
+      
+        console.log({name , email , password});
+        let result = await fetch("http://localhost:5000/register",{
             method:'post',
             body:JSON.stringify({name , email , password}),
-            headers:{'Content-Type':'application/json'}
+            headers:{'Content-Type' : 'application/json'}
         })
-        data = await data.json;
-        console.warn(data);
-         
-        localStorage.setItem("users",JSON.stringify(data));
-        
+        result = await result.json();
+     
+        localStorage.setItem("users",JSON.stringify(result))
+        console.log(result);
+
+        if(result){
+            window.location.href="/sports"; 
+        }
       
 
-
-
+       
+       
     }
+   
   return (
     <>
           <div className="jd ">
@@ -49,8 +66,10 @@ function SignUp() {
                         </div>
                        
                         <div className="p-t-10">
-                            <button className="button buttonSign btn btn--green" onClick={submitButton}>Submit</button>
+                            <button type="button" className="button buttonSign btn btn--green" onClick={dataPrint}>Submit</button>
                         </div>
+
+                       
                 
                 </div>
             </div>

@@ -34,7 +34,7 @@ constructor(props){
 
 async componentDidMount(){
   // console.log("i am component did mount");
-  let countryUrl = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=c31038ffcf164b289ad886412047cf1b&page=1&pageSize=20`;
+  let countryUrl = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=c4949b254b524ce89db94f5c1dd7591e&page=1&pageSize=20`;
   let fetched = await fetch(countryUrl);
   let fetchedFinal = await fetched.json();
   // return fetchedFinal;
@@ -51,7 +51,7 @@ return null;
 }
 else
 {
-let countryUrl = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=c31038ffcf164b289ad886412047cf1b&page=${this.state.page + 1}&pageSize = 20`;
+let countryUrl = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=c4949b254b524ce89db94f5c1dd7591e&page=${this.state.page + 1}&pageSize = 20`;
 let fetched = await fetch(countryUrl);
 let fetchedFinal = await fetched.json();
 // return fetchedFinal;
@@ -64,7 +64,7 @@ this.setState({articles : fetchedFinal.articles ,
 
 previous = async ()=> {console.log("prevoius");
 
-let countryUrl = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=c31038ffcf164b289ad886412047cf1b&page=${this.state.page - 1}&pageSize = 20`;
+let countryUrl = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=c4949b254b524ce89db94f5c1dd7591e&page=${this.state.page - 1}&pageSize = 20`;
 let fetched = await fetch(countryUrl);
 let fetchedFinal = await fetched.json();
 // return fetchedFinal;
@@ -77,7 +77,7 @@ this.setState({articles : fetchedFinal.articles ,
 
 fetchMoreData = async () => {
     this.setState({page : this.state.page + 1});
-    let countryUrl = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=c31038ffcf164b289ad886412047cf1b&page=${this.state.page + 1}&pageSize=20`;
+    let countryUrl = `https://newsapi.org/v2/top-headlines?country=in&category=${this.props.category}&apiKey=c4949b254b524ce89db94f5c1dd7591e&page=${this.state.page + 1}&pageSize=20`;
     let fetched = await fetch(countryUrl);
     let fetchedFinal = await fetched.json();
     // return fetchedFinal;
@@ -85,6 +85,7 @@ fetchMoreData = async () => {
     this.setState({articles :this.state.articles.concat( fetchedFinal.articles) ,  totalResults : fetchedFinal.totalResults});
 }
 
+ 
 
   render() {
     return (
@@ -94,6 +95,24 @@ fetchMoreData = async () => {
  
       <div>
 
+<input className="form-control btn-outline-warning container my-4 bg-light text-white" name="search" type="search" placeholder="   Search The News" onChange={async(event
+)=>{
+    let val = event.target.value;
+    if(val){
+    let result = await fetch(`http://localhost:5000/search/${val}`,
+    );
+    
+    result = await result.json();
+    this.setState(result);
+    }
+    else if(val === "") {
+        this.setState()
+    }
+  
+
+
+}} />
+    
 
 
 <InfiniteScroll
@@ -106,7 +125,7 @@ loader={<h5 className="py-5"><Spinner className="py-5"/></h5>}
  </InfiniteScroll>
 
    
-         <div className="container my-5">
+         <div className="container">
 <div className="row">
 {
 

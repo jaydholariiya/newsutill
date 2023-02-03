@@ -1,10 +1,20 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 
+
+
 // import PropTypes from 'prop-types'
+let auth = localStorage.getItem("users");
+let logout = () => {
+    localStorage.clear();
+    window.location = "/";
+}
+
+
+
 
 export class Navbar extends Component {
-  
+ 
 
   render() {
     return (
@@ -38,17 +48,26 @@ export class Navbar extends Component {
         <li className="nav-item">
           <Link className="nav-link active" to="/science">Science</Link>
         </li>
-        <li className="nav-item">
+        <li className="nav-item ">
           <Link className="nav-link active" to="/technology">Technology</Link>
         </li>
-
+        <li className="nameLink nav-item mx-5">
+          <Link className="nameLink nav-link active" to="/"><b className="text-warning">{auth ? "Welcome To NewsUtill -- " + JSON.parse(auth).email : "Please Register First"}</b></Link>
+        </li>
+        
 
       </ul>
-      <form className="d-flex" role="search">
-        <input className="searchbar form-control mx-2 " type="search" placeholder="Search"/>
+   
+
+<form class="form-inline my-2 my-lg-0">
+   
        
-        <button className=" btn btn-outline-success mx-2 text-white" ><Link className="textd text-white" to="/login">LogIn</Link></button>
-        <button className=" btn btn-outline-warning"><Link className="textd text-white" to="/">SignUp</Link></button>
+        
+
+        {!auth ?  <><button className=" btn btn-outline-success mx-2 text-white" ><Link className="textd text-white" to="/login">LogIn</Link></button> <button className=" btn btn-outline-warning"><Link className="textd text-white" to="/">SignUp</Link></button></>  : <button className=" btn btn-outline-warning" onClick={logout} ><Link to="/">Logout</Link></button>}
+       
+
+
        
       </form>
     </div>

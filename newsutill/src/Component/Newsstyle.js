@@ -5,7 +5,7 @@ export class Newsstyle extends Component {
   constructor(props){
     super(props);
 
-console.log("i am constructor form news component");
+
     this.state = { "status": "ok",
      "totalResults": 4,
       "articles":
